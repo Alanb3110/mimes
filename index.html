@@ -37,6 +37,7 @@
 <dialog class="settings" id="settings" aria-labelledby="settings-title"><div class="sheet-head"><h2 id="settings-title">Le jeu, à votre façon</h2><button class="icon-button" id="close-settings" aria-label="Fermer les réglages">✕</button></div><div class="sheet-body">
 <p class="theme-note" id="theme-note"></p>
 <div class="setting-row"><div><label for="duration">Durée d’un mime</label><p>Le chrono démarre quand tu le décides.</p></div><div class="select-wrap"><select id="duration"><option value="0">Sans chrono</option><option value="30">30 secondes</option><option value="60" selected>60 secondes</option><option value="90">90 secondes</option><option value="120">120 secondes</option></select></div></div>
+<div class="setting-row"><div><label for="kids-only">Accessible à 7 ans</label><p id="kids-note">Sélection indicative : mots simples et situations concrètes, sans expressions grivoises.</p></div><input type="checkbox" id="kids-only" aria-describedby="kids-note"></div>
 <div class="setting-row"><div><label for="specials">Cartes à gage</label><p id="special-note">Une surprise tous les 4 à 6 tirages.</p></div><input type="checkbox" id="specials" checked aria-describedby="special-note"></div>
 <div class="rules"><h3>✦ Comment ça marche ?</h3><p>Tire une carte, lis-la pour toi et cache-la avant de montrer l’écran. Démarrer le chrono la cache aussi.</p><p>Sur une <strong>carte à gage</strong>, mime normalement, puis indique le résultat :</p><p><strong>✓ Trouvé → celui qui mime a un gage.</strong><br><strong>✕ Pas trouvé → les autres joueurs ont un gage.</strong></p><p>Le gage est révélé après le résultat. À zéro au chrono, vous confirmez vous-mêmes si le mime a été trouvé à temps.</p><p>Vous pouvez passer un mime ou un gage. Les cartes ne se répètent pas avant la fin du paquet.</p></div>
 <button class="reset-game" id="reset">↻ Remélanger le paquet</button>
@@ -473,15 +474,164 @@ const dares = [
 {solo:'Fais un discours de 10 secondes dans une langue entièrement inventée.',group:'Faites une conversation de 10 secondes dans une langue entièrement inventée.'},
 {solo:'Invente un super-pouvoir inutile et montre comment il fonctionne.',group:'Inventez chacun un super-pouvoir inutile et montrez-le en un geste.'}
 ];
-const cards=Object.entries(themes).flatMap(([theme,data])=>Object.entries(data.groups).flatMap(([level,group])=>group.cards.map((text,index)=>({id:theme+'-'+level+'-'+index,theme,level,text}))));
+// Editorial opt-in selection: concrete vocabulary and familiar situations.
+// New cards remain outside the child filter until explicitly reviewed.
+const kidsSelection = {
+  "expressions": [
+    "Avoir un chat dans la gorge",
+    "Donner sa langue au chat",
+    "Tomber dans les pommes",
+    "Avoir la tête dans les nuages",
+    "Avoir les yeux plus gros que le ventre",
+    "Avoir un poil dans la main",
+    "Avoir la main verte",
+    "Avoir le cœur sur la main",
+    "Se creuser la tête",
+    "Casser les pieds à quelqu’un",
+    "Raconter des salades",
+    "Manger sur le pouce",
+    "Avoir la langue bien pendue",
+    "Marcher sur des œufs",
+    "Jeter l’éponge",
+    "Se serrer la ceinture",
+    "Jouer avec le feu",
+    "Faire les gros yeux",
+    "Avoir l’eau à la bouche",
+    "Prendre la mouche",
+    "Avoir mangé du lion",
+    "Avoir une mémoire de poisson rouge",
+    "Avoir une faim de loup",
+    "Être une poule mouillée",
+    "Faire un froid de canard",
+    "Pleuvoir des cordes",
+    "Faire la grasse matinée",
+    "Faire l’autruche",
+    "Se regarder le nombril",
+    "Se lever du pied gauche",
+    "Avoir des fourmis dans les jambes",
+    "Avoir la tête comme une pastèque",
+    "Avoir un appétit d’oiseau",
+    "Se noyer dans un verre d’eau"
+  ],
+  "halloween": [
+    "Un zombie",
+    "Une sorcière sur son balai",
+    "Un vampire",
+    "Un fantôme",
+    "Une momie",
+    "Un loup-garou",
+    "Une chauve-souris",
+    "Une araignée",
+    "Un chat noir",
+    "Un squelette",
+    "Une citrouille qui prend vie",
+    "Un épouvantail",
+    "Un savant fou",
+    "Un ogre affamé",
+    "Un clown effrayant",
+    "Un corbeau",
+    "Un serpent géant",
+    "Un crapaud",
+    "Un dragon",
+    "Un pirate fantôme",
+    "Une plante carnivore",
+    "Un rat dans une cave",
+    "Une sorcière qui remue son chaudron",
+    "Un vampire qui déploie sa cape",
+    "Un fantôme qui flotte",
+    "Un zombie qui tend les bras",
+    "Une momie qui se réveille",
+    "Un squelette qui claque des dents",
+    "Un chat qui fait le dos rond",
+    "Une araignée qui tisse sa toile",
+    "Un fantôme sous un drap",
+    "Une citrouille au sourire effrayant",
+    "Un extraterrestre",
+    "Un chien à trois têtes",
+    "Un serpent à deux têtes",
+    "Un arbre hanté",
+    "Un miroir hanté",
+    "Un livre qui vole",
+    "Un chapeau ensorcelé",
+    "Un poisson monstrueux",
+    "Creuser une citrouille",
+    "Récolter des bonbons de porte en porte",
+    "Préparer une potion magique",
+    "Traverser une maison hantée",
+    "Se faire prendre dans une toile d’araignée",
+    "Fuir un monstre dans le noir",
+    "Enfiler un déguisement trop petit",
+    "Manger un bonbon terriblement acide",
+    "Chasser un fantôme avec un aspirateur",
+    "Ouvrir une porte qui fait très peur",
+    "Découvrir une araignée dans ses cheveux",
+    "Se faire poursuivre par son propre balai",
+    "Essayer de faire peur à quelqu’un",
+    "Allumer une bougie qui s’éteint toute seule",
+    "Se regarder dans un miroir et découvrir un monstre",
+    "Essayer d’enlever une toile d’araignée de son visage",
+    "Se cacher d’un monstre dans un placard",
+    "Se faire ensorceler et changer en crapaud",
+    "Distribuer des bonbons à des petits monstres",
+    "Se battre avec une cape trop longue",
+    "Fouiller un sac de bonbons vide",
+    "Faire une potion qui explose au visage",
+    "Marcher dans un couloir plein de fantômes",
+    "Se déguiser en fantôme avec un drap trop grand",
+    "Essayer d’attraper une citrouille qui roule toute seule",
+    "Se déguiser en momie avec du papier toilette",
+    "Ouvrir une boîte dont sort une chauve-souris",
+    "Mettre une fausse araignée dans une chaussure",
+    "Faire semblant d’être une statue puis surprendre les passants",
+    "Courir après son sac de bonbons emporté par le vent",
+    "Un vampire chez le dentiste",
+    "Une sorcière en panne de balai",
+    "Un fantôme qui a peur du noir",
+    "Un squelette qui essaie de faire des pompes",
+    "Une momie qui se prend les pieds dans ses bandelettes",
+    "Une sorcière qui rate son atterrissage",
+    "Un fantôme coincé dans un mur",
+    "Un monstre qui prend un selfie",
+    "Une araignée qui met ses huit chaussures",
+    "Un squelette qui joue de la batterie",
+    "Un épouvantail qui a peur des oiseaux",
+    "Un chat noir qui marche sur un sol brûlant",
+    "Un zombie qui fait ses courses au supermarché",
+    "Un fantôme qui éternue dans son drap",
+    "Un loup-garou qui joue à rapporter la balle",
+    "Un squelette qui essaie de gonfler un ballon",
+    "Une momie qui fait du patin à roulettes",
+    "Une citrouille qui essaie de rentrer dans un pantalon",
+    "Un diable qui se brûle avec sa soupe",
+    "Un dragon qui a le hoquet",
+    "Une sorcière qui commande une pizza",
+    "Un monstre qui a peur d’une souris",
+    "Un fantôme qui essaie de manger des spaghettis",
+    "Une chauve-souris qui utilise un parapluie",
+    "Une citrouille qui essaie de se brosser les dents",
+    "Un vampire qui essaie de boire avec une paille trouée",
+    "Une sorcière qui utilise son balai comme aspirateur",
+    "Un fantôme qui cherche ses clés dans ses poches",
+    "Un dragon qui souffle des bulles au lieu du feu",
+    "Un monstre qui apprend à faire un cœur avec ses doigts",
+    "Un vampire qui goûte une glace trop froide",
+    "Une sorcière qui joue au bowling avec des citrouilles",
+    "Un fantôme qui tente de souffler une bougie",
+    "Un épouvantail qui essaie de se gratter le dos",
+    "Un yéti qui essaie de se sécher les cheveux"
+  ]
+};
+const kidsKeys = new Set(Object.entries(kidsSelection).flatMap(([theme,texts])=>texts.map(text=>theme+'|'+text)));
+const cards=Object.entries(themes).flatMap(([theme,data])=>Object.entries(data.groups).flatMap(([level,group])=>group.cards.map((text,index)=>({id:theme+'-'+level+'-'+index,theme,level,text,kidFriendly:kidsKeys.has(theme+'|'+text)}))));
 const $=id=>document.getElementById(id);
-let theme='expressions',level='all',bag=[],current=null,hidden=false,round=1,drawn=0;
+let theme='expressions',level='all',kidsOnly=false,bag=[],current=null,hidden=false,round=1,drawn=0;
 let isSpecial=false,outcome=null,currentDare=null,dareBag=[],untilSpecial=nextSpecial();
 let remaining=Number($('duration').value),deadline=0,interval=null,timerState='ready';
 let fitRequest=null;
 function nextSpecial(){return 4+Math.floor(Math.random()*3);}
 function shuffle(list){const out=[...list];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
-function pool(){return cards.filter(c=>c.theme===theme&&(level==='all'||c.level===level));}
+function themePool(){return cards.filter(c=>c.theme===theme&&(!kidsOnly||c.kidFriendly));}
+function pool(){return themePool().filter(c=>level==='all'||c.level===level);}
 function fill(){bag=shuffle(pool());if(current&&bag.length>1&&bag.at(-1).id===current.id){[bag[0],bag[bag.length-1]]=[bag[bag.length-1],bag[0]];}drawn=0;}
 function stopInterval(){if(interval!==null)clearInterval(interval);interval=null;}
 function paintClock(){
@@ -514,8 +664,8 @@ function render(){
  $('recipient').hidden=true;$('recipient').textContent='';
  const group=current?themes[current.theme].groups[current.level]:null;
  if(!current){
-  $('tag').textContent='À toi de jouer';$('icon').textContent=themes[theme].icon;
-  $('prompt').textContent='On tire la première ?';$('hint').textContent='Garde la carte pour toi, puis fais deviner sans un mot.';
+  $('tag').textContent=kidsOnly?'Sélection 7 ans':'À toi de jouer';$('icon').textContent=themes[theme].icon;
+  $('prompt').textContent=pool().length?'On tire la première ?':'Aucune carte pour ce filtre';$('hint').textContent=pool().length?'Garde la carte pour toi, puis fais deviner sans un mot.':'Change de catégorie ou désactive le filtre 7 ans.';
  }else if(hidden){
   $('tag').textContent=outcome?'Gage caché':'À vous de deviner';$('icon').textContent='🙈';
   $('prompt').textContent=outcome?'Un petit secret…':'Chut… ça mime !';
@@ -533,15 +683,17 @@ function render(){
  $('hide').disabled=!current;
  $('hide').setAttribute('aria-pressed',String(hidden));
  $('hide').textContent=hidden?(outcome?'👀 Voir le gage':'👀 Voir la carte'):(outcome?'🙈 Cacher le gage':'🙈 Cacher la carte');
+ $('draw').disabled=pool().length===0;
  $('draw').textContent=!current?'🎲 Tirer une carte':isSpecial&&!outcome?'↗ Passer':'🎲 Suivante';
  $('outcomes').hidden=!current||!isSpecial||Boolean(outcome);
- $('control-note').textContent=isSpecial&&!outcome?'Indiquez le résultat pour révéler le gage.':outcome?'Faites le gage, puis passez à la carte suivante.':'Un mime sans parler · les réglages sont en haut';
+ $('control-note').textContent=isSpecial&&!outcome?'Indiquez le résultat pour révéler le gage.':outcome?'Faites le gage, puis passez à la carte suivante.':kidsOnly?'Filtre 7 ans activé · réglages en haut':'Un mime sans parler · les réglages sont en haut';
  $('status').textContent=drawn+' / '+pool().length+' cartes';
- $('bottom-note').textContent=outcome?(outcome==='found'?'Mime trouvé ✓':'Mime non trouvé'):'Paquet '+round+' · sans répétition';
+ $('bottom-note').textContent=(kidsOnly?'7 ans · ':'')+(outcome?(outcome==='found'?'Mime trouvé ✓':'Mime non trouvé'):'Paquet '+round+' · sans répétition');
  paintClock();fitCard();
 }
 function animate(){const card=$('card');card.classList.remove('pop');void card.offsetWidth;card.classList.add('pop');}
 function draw(){
+ if(!pool().length)return;
  if(!bag.length){round++;fill();}
  current=bag.pop();drawn++;hidden=false;isSpecial=false;outcome=null;currentDare=null;
  if($('specials').checked){untilSpecial--;if(untilSpecial<=0){isSpecial=true;untilSpecial=nextSpecial();}}
@@ -557,13 +709,20 @@ function resolve(result){
 }
 function resetGame(){current=null;hidden=false;isSpecial=false;outcome=null;currentDare=null;dareBag=[];untilSpecial=nextSpecial();round=1;fill();resetTimer();$('announcement').textContent='';render();}
 function updateTheme(){
- $('theme-note').textContent=themes[theme].note;
+ const available=themePool();
+ if(level!=='all'&&!available.some(c=>c.level===level))level='all';
+ $('theme-note').textContent=kidsOnly?available.length+' cartes dans la sélection 7 ans. Vocabulaire et expressions à adapter à l’enfant.':themes[theme].note;
  const labels={all:'Tout mélanger',...Object.fromEntries(Object.entries(themes[theme].groups).map(([key,value])=>[key,value.label]))};
- for(const option of $('category').options)option.textContent=labels[option.value];
+ for(const option of $('category').options){
+  const count=option.value==='all'?available.length:available.filter(c=>c.level===option.value).length;
+  option.textContent=labels[option.value]+(kidsOnly?' · '+count:'');
+  option.disabled=count===0;
+ }
  $('category').value=level;
 }
 $('theme').addEventListener('change',()=>{theme=$('theme').value;level='all';updateTheme();resetGame();});
-$('category').addEventListener('change',()=>{level=$('category').value;resetGame();});
+$('category').addEventListener('change',()=>{level=$('category').value;updateTheme();resetGame();});
+$('kids-only').addEventListener('change',()=>{kidsOnly=$('kids-only').checked;updateTheme();resetGame();});
 $('draw').addEventListener('click',draw);
 $('hide').addEventListener('click',()=>{if(current){hidden=!hidden;render();}});
 $('found').addEventListener('click',()=>resolve('found'));
