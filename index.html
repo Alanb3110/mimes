@@ -3,48 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#130f1d">
+<meta name="theme-color" content="#111018">
 <title>Mime à la carte — Le jeu de mimes</title>
 <style>
-:root{color-scheme:dark;--bg:#130f1d;--ink:#fff3df;--muted:#b8acc8;--orange:#ff9d48;--line:#ffffff20}
-*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 15% 5%,#512c633b,transparent 50%),radial-gradient(ellipse at 90% 90%,#a74f2426,transparent 45%),var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:30px 20px}main{max-width:570px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}.mark{color:var(--orange)}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#b6d193;margin-right:7px}header{text-align:center;margin:32px 0 25px}.eyebrow{font-size:12px;font-weight:700;letter-spacing:3px;color:var(--orange);text-transform:uppercase}h1{font-family:Georgia,serif;font-size:clamp(40px,9vw,58px);font-weight:500;letter-spacing:-2px;margin:10px 0}h1 em{color:var(--orange);font-style:italic}.intro{margin:0;color:var(--muted);font-size:15px;line-height:1.5}.filters{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}button,select{font:inherit}button{cursor:pointer;border:0;touch-action:manipulation;transition:background .15s,transform .15s}button:active{transform:scale(.97)}button:focus-visible,select:focus-visible{outline:3px solid var(--orange);outline-offset:4px}.filter{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:30px;padding:10px 15px;font-size:13px}.filter[aria-pressed=true]{background:#ff9d481a;border-color:#ff9d4880;color:var(--orange)}.card{min-height:300px;border:1px solid #ffbd792e;border-radius:25px;background:radial-gradient(ellipse at 50% 0,#53365555,transparent 80%),#21192b;box-shadow:0 20px 60px #0003;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:35px 26px;overflow:hidden}.card:before,.card:after{position:absolute;color:#ffbd7930;font-size:26px;content:'✧';pointer-events:none}.card:before{top:18px;left:23px}.card:after{bottom:18px;right:23px}.card.pop{animation:pop .25s ease-out}@keyframes pop{from{opacity:.3;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}.icon{font-size:48px;line-height:1.2;margin-bottom:14px}.tag{text-transform:uppercase;letter-spacing:2px;font-size:10px;color:var(--orange);margin:0 0 14px}.prompt{font-family:Georgia,serif;font-size:clamp(26px,6vw,34px);font-weight:500;line-height:1.18;margin:0;max-width:470px}.hint{font-size:13px;color:var(--muted);margin:18px 0 0;line-height:1.5}.status{text-align:center;font-size:12px;color:var(--muted);min-height:18px;margin:15px 0}.draw{width:100%;padding:18px 20px;background:var(--orange);border-radius:15px;color:#241326;font-weight:800;font-size:18px;box-shadow:0 6px 25px #ff9d481a}.draw:hover{background:#ffb36f}.below{display:flex;justify-content:space-between;gap:10px;margin-top:10px}.quiet{background:transparent;color:var(--muted);padding:11px;font-size:13px;border-radius:10px}.quiet:hover{background:#ffffff08}.quiet:disabled{opacity:.4;cursor:default}.timer{border-top:1px solid var(--line);margin-top:20px;padding-top:20px;display:flex;align-items:center;gap:10px}.timer-label{color:var(--muted);font-size:12px;display:block;margin-bottom:3px}select{background:#21192b;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px;font-size:12px}.clock{font-variant-numeric:tabular-nums;font-size:30px;margin-left:auto;letter-spacing:-1px;min-width:72px;text-align:right}.clock.urgent{color:var(--orange)}.start{background:#352640;color:var(--ink);padding:12px 15px;border:1px solid #ffffff20;border-radius:11px;font-size:13px}.timer-message{font-size:12px;text-align:right;color:var(--orange);min-height:18px;margin-top:8px}footer{color:#8c7f9e;font-size:12px;text-align:center;line-height:1.6;margin-top:24px}footer strong{font-weight:500;color:var(--muted)}noscript{display:block;padding:20px;background:#512c63;border-radius:12px;margin-bottom:20px}@media(max-width:380px){body{padding:22px 14px}.filter{padding:9px 11px}.timer{gap:7px}.start{padding:12px 10px}.card{min-height:290px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
-
-/* Large, explicit controls, including a dedicated full-width privacy button. */
-header{margin:22px 0 18px}h1{margin:7px 0}.filter{background:#30263e;border-color:#756184;color:#fff3df;min-height:46px;font-weight:650}.filter:hover{background:#463354}.filter[aria-pressed=true]{background:var(--orange);border-color:var(--orange);color:#241326}.filters{margin-bottom:14px}.card{min-height:260px;padding:26px 22px}.actions{display:grid;gap:10px;margin-top:14px}.privacy{min-height:62px;border:2px solid #fff3df;border-radius:15px;background:#fff3df;color:#21132d;font-size:19px;font-weight:800;box-shadow:0 5px 22px #fff3df14}.privacy:hover{background:#fffaf0}.privacy[aria-pressed=true]{background:#d9c3ff;border-color:#d9c3ff}.privacy:disabled{background:#302638;border-color:#65516f;color:#b9a6c4;box-shadow:none;cursor:default}.draw{min-height:60px;border:2px solid #ffbc7d}.below{align-items:center;margin-top:12px;flex-wrap:wrap}.quiet{background:#352640;color:#fff3df;border:1px solid #826694;padding:12px 16px;min-height:46px;font-weight:650}.quiet:hover{background:#4c365b}.special-toggle{font-size:13px;color:var(--ink);display:flex;align-items:center;gap:8px;min-height:46px;cursor:pointer}.special-toggle input{width:21px;height:21px;accent-color:var(--orange);cursor:pointer}.special-note{font-size:12px;color:var(--muted);margin:5px 0 0;line-height:1.4}.status{margin:12px 0 0}.card.special{border:2px solid #c99aff;background:radial-gradient(ellipse at 50% 0,#70439270,transparent 85%),#2c1c3c;box-shadow:0 8px 40px #bf80ff20}.card.special .tag{color:#e1c2ff}.challenge{margin:18px 0 0;padding:14px 16px;border:1px solid #bd91e080;border-radius:14px;background:#170d2355;max-width:100%;font-size:15px;line-height:1.45;color:#f4e9ff}.challenge strong{display:block;letter-spacing:1px;text-transform:uppercase;font-size:11px;color:#d5b1ff;margin-bottom:5px}[hidden]{display:none!important}.start{background:#59406c;border:1px solid #a887bc;font-weight:700;min-height:48px}.start:hover{background:#705185}select{min-height:42px;border-color:#826694}.timer-label{color:#d4c5df}.timer{margin-top:16px;padding-top:16px}footer{margin-top:18px}@media(max-width:420px){body{padding:20px 14px}.top{font-size:10px;letter-spacing:1px}header{margin:17px 0}h1{font-size:43px}.card{min-height:235px}.icon{font-size:38px;margin-bottom:10px}.prompt{font-size:28px}.hint{margin-top:12px}.tag{margin-bottom:10px}.filter{padding:10px 12px}.privacy{min-height:60px}.draw{min-height:58px}.challenge{font-size:14px}}
-
-
-.theme-picker{margin-bottom:14px}.theme-picker label{display:block;font-size:12px;color:var(--muted);margin-bottom:7px}.theme-picker select{width:100%;min-height:52px;background:#352640;border:1px solid #a887bc;font-size:16px;font-weight:700;padding:12px;border-radius:12px}.theme-picker p{font-size:12px;line-height:1.4;color:var(--muted);margin:7px 0 0}.filters .filter{flex:1;padding:10px 8px;font-size:12px}h1{font-size:clamp(38px,8.5vw,53px)}
+:root{color-scheme:dark;--bg:#111018;--panel:#201c2b;--ink:#fff7ed;--muted:#bdb2cb;--accent:#ffab66;--violet:#c9afff;--line:#ffffff20;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:radial-gradient(ellipse at 20% 0,#6e3f682a,transparent 60%),var(--bg);color:var(--ink);display:grid;place-items:center;overscroll-behavior:none}button,select,input{font:inherit}button,select{touch-action:manipulation}button{cursor:pointer;border:0;transition:background .15s,transform .15s}button:active{transform:scale(.98)}button:disabled{opacity:.4;cursor:default}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}[hidden]{display:none!important}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.app{width:100%;max-width:570px;height:100%;height:100dvh;max-height:940px;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:14px;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}.header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px}.brand{display:flex;align-items:center;gap:10px;min-width:0}.brand-mark{display:grid;place-items:center;flex:none;width:40px;height:40px;border-radius:13px;background:#ffab661a;color:var(--accent);font-size:25px;border:1px solid #ffab6633}.brand h1{font-size:21px;letter-spacing:-.7px;margin:0;font-weight:800}.brand p{margin:2px 0 0;color:var(--muted);font-size:11px;letter-spacing:.3px}.icon-button{display:grid;place-items:center;width:44px;height:44px;flex:none;background:#282230;color:var(--ink);border:1px solid var(--line);border-radius:14px}.icon-button:hover{background:#3a3045}.icon-button svg{width:21px;height:21px}.selectors{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:8px}.select-wrap{position:relative;min-width:0}.select-wrap:after{content:'⌄';position:absolute;right:13px;top:50%;transform:translateY(-55%);pointer-events:none;color:var(--muted)}select{appearance:none;-webkit-appearance:none;border:1px solid #ffffff26;border-radius:13px;background:#211c2a;color:var(--ink);width:100%;min-height:46px;padding:10px 29px 10px 12px;font-size:13px;font-weight:650;text-overflow:ellipsis}.select-wrap.category select{color:#ddd1ed;background:#19161f}
+.card{position:relative;display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0;padding:20px;border-radius:26px;background:radial-gradient(ellipse at 50% -10%,#654c754a,transparent 75%),#211c2b;border:1px solid #9c81af40;box-shadow:0 16px 45px #0003;overflow:hidden}.card.special{border-color:#c9afff99;background:radial-gradient(ellipse at 50% 0,#815cb75c,transparent 80%),#261c34}.card.result{border-color:#ffab6670;background:radial-gradient(ellipse at 50% 0,#ffab6624,transparent 80%),#251e29}.card-top,.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;color:var(--muted);font-size:11px}.tag{text-transform:uppercase;font-size:10px;font-weight:750;letter-spacing:1.4px;overflow-wrap:anywhere}.special-badge{background:#c9afff20;color:#e3d3ff;border:1px solid #c9afff50;border-radius:7px;padding:5px 7px;font-size:10px;white-space:nowrap;font-weight:700}.card-body{display:flex;min-height:0;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:16px;padding:18px 0;overflow:auto;scrollbar-width:thin}.card-icon{font-size:52px;line-height:1.15;flex:none}.prompt{margin:0;font-weight:750;font-size:clamp(25px,6.8vw,36px);line-height:1.18;letter-spacing:-.85px;overflow-wrap:anywhere;text-wrap:balance}.hint{max-width:370px;margin:0;font-size:13px;line-height:1.45;color:var(--muted);text-wrap:balance}.recipient{margin:0;color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px}.card-bottom{padding-top:8px;min-height:20px}.deck-count{font-variant-numeric:tabular-nums}.bottom-note{color:#a797b6;font-size:10px}.pop{animation:arrive .2s ease-out}@keyframes arrive{from{opacity:.4;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.controls{display:grid;gap:10px;min-width:0}.timerbar{display:flex;align-items:center;gap:10px;padding:0 2px;min-height:44px}.clock{font-size:29px;font-weight:750;letter-spacing:-1px;line-height:1;font-variant-numeric:tabular-nums;min-width:67px}.clock.urgent{color:var(--accent)}.timer-copy{flex:1;min-width:0;color:var(--muted);font-size:11px;line-height:1.35}.timer-copy strong{display:block;color:var(--ink);font-size:12px;font-weight:650}.timer-start{min-height:44px;padding:10px 14px;border-radius:12px;background:#33293f;color:#f7ebff;border:1px solid #79628e;font-size:13px;font-weight:700}.timer-start:hover{background:#4c3b5c}.timer-reset{width:40px;height:40px;min-width:40px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:12px;font-size:21px}.actions{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:8px}.privacy,.draw{min-height:56px;border-radius:15px;font-size:15px;font-weight:800;padding:12px 8px}.privacy{color:#24192f;background:#fff2df;border:1px solid #fff8ee;box-shadow:0 5px 22px #fff2df0c}.privacy:hover{background:#fffaf1}.privacy[aria-pressed=true]{background:#dcccff;border-color:#e3d5ff}.privacy:disabled{color:#c2b6ce;background:#302738;border-color:#5d4b6b;box-shadow:none}.draw{color:#2c1927;background:var(--accent);border:1px solid #ffc18c}.draw:hover{background:#ffbd85}.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:8px}.outcome{min-height:46px;border-radius:12px;font-size:14px;font-weight:750;border:1px solid #789389;background:#1e332d;color:#ceefdf}.outcome.missed{background:#392b31;border-color:#9c7181;color:#ffe0ea}.outcome:hover{filter:brightness(1.15)}.control-note{font-size:11px;color:var(--muted);text-align:center;line-height:1.3;margin:0;min-height:15px}
+.settings{width:min(100% - 24px,520px);max-height:calc(100dvh - 28px);padding:0;border:1px solid #8d729e70;border-radius:24px;background:#201a2a;color:var(--ink);box-shadow:0 25px 100px #0008}.settings::backdrop{background:#08060dbb;backdrop-filter:blur(8px)}.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.sheet-head h2{margin:0;font-size:20px;letter-spacing:-.5px}.sheet-body{padding:20px;overflow-y:auto;max-height:calc(100dvh - 120px)}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 0 18px}.setting-row>div{flex:1}.setting-row label,.setting-title{font-size:14px;font-weight:700}.setting-row p{font-size:12px;color:var(--muted);line-height:1.45;margin:5px 0 0}.setting-row .select-wrap{width:145px;flex:none}.setting-row input{width:24px;height:24px;accent-color:var(--accent);flex:none}.rules{border:1px solid var(--line);background:#ffffff04;padding:16px;border-radius:15px;margin:0 0 20px}.rules h3{font-size:13px;margin:0 0 9px}.rules p{font-size:12px;color:#c9bdd5;line-height:1.5;margin:6px 0}.rules strong{color:var(--ink)}.reset-game{width:100%;min-height:46px;border:1px solid #816891;border-radius:12px;background:#35283f;color:var(--ink);font-size:13px;font-weight:700}.theme-note{font-size:12px;line-height:1.45;color:var(--muted);margin:0 0 16px}.js-warning{background:#533044;border-radius:12px;padding:12px;font-size:13px}
+@media(max-height:680px){.app{gap:10px;padding-top:max(10px,env(safe-area-inset-top));padding-bottom:max(10px,env(safe-area-inset-bottom))}.card{padding:16px 18px;border-radius:21px}.card-body{gap:12px;padding:12px 0}.card-icon{font-size:40px}.hint{font-size:12px}.privacy,.draw{min-height:50px}.controls{gap:8px}.brand p{display:none}}
+@media(max-height:560px){.app{gap:8px;padding:8px max(12px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))}.header{min-height:40px}.brand-mark{width:34px;height:34px;font-size:21px}.brand h1{font-size:19px}.header .icon-button{width:40px;height:40px}.selectors select{min-height:40px;font-size:12px}.card{padding:12px 15px}.card-icon{display:none}.card-body{gap:10px;padding:8px 0}.prompt{font-size:25px}.hint{font-size:11px}.card-bottom{font-size:10px;min-height:16px;padding-top:4px}.timerbar{min-height:38px;gap:8px}.clock{font-size:26px}.timer-start{min-height:38px;padding:8px 12px}.timer-reset{width:36px;height:36px;min-width:36px}.privacy,.draw{min-height:46px;font-size:14px}.outcome{min-height:40px;font-size:13px}.control-note{font-size:10px}.controls{gap:7px}}
+@media(min-width:600px) and (max-height:450px){.app{max-width:940px;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr);gap:8px 18px}.header,.selectors{grid-column:1/-1}.card{grid-column:1;grid-row:3}.controls{grid-column:2;grid-row:3;align-content:center;gap:12px}.card-icon{display:none}.prompt{font-size:29px}.control-note{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<main>
-<div class="top"><span class="mark">✦ Les soirées mimes</span><span><span class="dot"></span>Sans paroles</span></div>
-<header><div class="eyebrow">Le jeu de vos soirées</div><h1>Mime à <em>la carte</em></h1><p class="intro">Une carte. Un mime. À eux de deviner.</p></header>
-<noscript>Active JavaScript dans ton navigateur pour tirer les cartes.</noscript>
-<div class="theme-picker"><label for="theme">Choisis ton thème</label><select id="theme"><option value="expressions" selected>🤪 Expressions absurdes</option><option value="halloween">🎃 Halloween</option></select><p id="theme-note">80 expressions à prendre au pied de la lettre, dont 10 grivoises.</p></div>
-<div class="filters" role="group" aria-label="Catégorie de cartes">
-<button class="filter" data-level="all" aria-pressed="true">Tout mélanger</button>
-<button class="filter" data-level="easy" aria-pressed="false">Classiques</button>
-<button class="filter" data-level="scene" aria-pressed="false">Bien imagées</button>
-<button class="filter" data-level="crazy" aria-pressed="false">Grivoises</button>
-</div>
-<section class="card" id="card" aria-live="polite" aria-atomic="true" aria-label="Carte à mimer">
-<div class="icon" id="icon" aria-hidden="true">🤪</div><p class="tag" id="tag">Prêt à entrer dans le jeu ?</p><h2 class="prompt" id="prompt">À prendre au pied<br>de la lettre !</h2><div class="challenge" id="challenge" hidden><strong>🪄 Ton gage</strong><span id="challenge-text"></span></div><p class="hint" id="hint">Tire une carte et garde-la pour toi.</p>
+<main class="app">
+<header class="header"><div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><div><h1>Mime à la carte</h1><p>Pas un mot. Tout un spectacle.</p></div></div><button class="icon-button" id="open-settings" aria-label="Réglages et règles" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="#282230"/><circle cx="15" cy="17" r="3" fill="#282230"/></svg></button></header>
+<div class="selectors"><div class="select-wrap"><label class="sr-only" for="theme">Thème</label><select id="theme"><option value="expressions">🤪 Expressions absurdes</option><option value="halloween">🎃 Halloween</option></select></div><div class="select-wrap category"><label class="sr-only" for="category">Catégorie</label><select id="category"><option value="all">Tout mélanger</option><option value="easy">Classiques</option><option value="scene">Bien imagées</option><option value="crazy">Grivoises</option></select></div></div>
+<section class="card" id="card" aria-label="Carte de jeu" aria-live="polite" aria-atomic="true">
+<div class="card-top"><span class="tag" id="tag">À toi de jouer</span><span class="special-badge" id="special-badge" hidden>✦ Carte à gage</span></div>
+<div class="card-body" id="card-body"><div class="card-icon" id="icon" aria-hidden="true">🤪</div><p class="recipient" id="recipient" hidden></p><h2 class="prompt" id="prompt">On tire la première ?</h2><p class="hint" id="hint">Garde la carte pour toi, puis fais deviner sans un mot.</p></div>
+<div class="card-bottom"><span class="deck-count" id="status">0 / 80 cartes</span><span class="bottom-note" id="bottom-note">Sans paroles</span></div>
 </section>
-<div class="actions">
-<button class="privacy" id="hide" aria-pressed="false" aria-controls="card" disabled>🙈 Cacher la carte</button>
-<button class="draw" id="draw">🎲 Au hasard</button>
+<div class="controls">
+<div class="timerbar"><output class="clock" id="clock" aria-label="Temps restant">1:00</output><div class="timer-copy"><strong id="timer-label">À ton rythme</strong><span id="timer-detail">Chrono facultatif</span></div><button class="timer-start" id="start" disabled>▶ Chrono</button><button class="timer-reset" id="reset-timer" aria-label="Réinitialiser le chrono" disabled>↺</button></div>
+<div class="actions"><button class="privacy" id="hide" aria-pressed="false" aria-controls="card" disabled>🙈 Cacher la carte</button><button class="draw" id="draw">🎲 Tirer une carte</button></div>
+<div class="outcomes" id="outcomes" role="group" aria-label="Résultat de la carte spéciale" hidden><button class="outcome" id="found">✓ Trouvé</button><button class="outcome missed" id="missed">✕ Pas trouvé</button></div>
+<p class="control-note" id="control-note">230 cartes · 2 thèmes · gages surprises</p>
 </div>
-<p class="status" id="status" aria-live="polite"></p>
-<div class="below"><label class="special-toggle"><input id="specials" type="checkbox" checked aria-describedby="special-note"> 🪄 Cartes gages</label><button class="quiet" id="reset">↻ Remélanger</button></div>
-<p class="special-note" id="special-note">Une carte spéciale tous les 4 à 6 tirages : un mime avec un gage en plus. Tu peux passer.</p>
-<div class="timer">
-<div><label class="timer-label" for="duration">Chrono facultatif</label><select id="duration"><option value="30">30 secondes</option><option value="60" selected>60 secondes</option><option value="90">90 secondes</option><option value="120">120 secondes</option></select></div>
-<output class="clock" id="clock" aria-label="Temps restant">1:00</output><button class="start" id="start">Démarrer</button>
-</div>
-<div class="timer-message" id="timer-message" role="status"></div>
-<footer><strong>Montre la carte seulement à la personne qui mime.</strong><br>Sans parler ni faire de bruit. Le chrono démarre quand tu le décides.<br>Chaque carte sort une seule fois avant le prochain mélange.</footer>
 </main>
+<dialog class="settings" id="settings" aria-labelledby="settings-title"><div class="sheet-head"><h2 id="settings-title">Le jeu, à votre façon</h2><button class="icon-button" id="close-settings" aria-label="Fermer les réglages">✕</button></div><div class="sheet-body">
+<p class="theme-note" id="theme-note"></p>
+<div class="setting-row"><div><label for="duration">Durée d’un mime</label><p>Le chrono démarre quand tu le décides.</p></div><div class="select-wrap"><select id="duration"><option value="0">Sans chrono</option><option value="30">30 secondes</option><option value="60" selected>60 secondes</option><option value="90">90 secondes</option><option value="120">120 secondes</option></select></div></div>
+<div class="setting-row"><div><label for="specials">Cartes à gage</label><p id="special-note">Une surprise tous les 4 à 6 tirages.</p></div><input type="checkbox" id="specials" checked aria-describedby="special-note"></div>
+<div class="rules"><h3>✦ Comment ça marche ?</h3><p>Tire une carte, lis-la pour toi et cache-la avant de montrer l’écran. Démarrer le chrono la cache aussi.</p><p>Sur une <strong>carte à gage</strong>, mime normalement, puis indique le résultat :</p><p><strong>✓ Trouvé → celui qui mime a un gage.</strong><br><strong>✕ Pas trouvé → les autres joueurs ont un gage.</strong></p><p>Le gage est révélé après le résultat. À zéro au chrono, vous confirmez vous-mêmes si le mime a été trouvé à temps.</p><p>Vous pouvez passer un mime ou un gage. Les cartes ne se répètent pas avant la fin du paquet.</p></div>
+<button class="reset-game" id="reset">↻ Remélanger le paquet</button>
+</div></dialog>
+<div class="sr-only" id="announcement" role="status"></div>
+<noscript><p class="js-warning">Active JavaScript dans ton navigateur pour jouer.</p></noscript>
 <script>
 'use strict';
 const halloweenGroups = {
@@ -252,76 +250,147 @@ expressions: {label:'Expressions absurdes',icon:'🤪',note:'80 expressions à p
 }},
 halloween: {label:'Halloween',icon:'🎃',note:'150 monstres, scènes et situations d’Halloween.',welcome:'Le prochain monstre, c’est toi.',hint:'Pas un mot. À toi de jouer !',groups:halloweenGroups}
 };
-const challenges = [
-'Mime au ralenti, comme au cinéma.',
-'Mime comme un robot rouillé.',
-'Garde une main derrière le dos pendant tout le mime.',
-'Mime avec un sourire exagéré du début à la fin.',
-'Fais tout en tout petits gestes.',
-'Exagère chaque geste comme au théâtre.',
-'Mime en restant assis sur une chaise imaginaire.',
-'Change de vitesse : lent, rapide, puis lent à nouveau.',
-'Mime comme si tu avais très froid.',
-'Mime comme si tu marchais dans de la gelée.',
-'Commence par une révérence très solennelle.',
-'Mime en gardant les coudes collés au corps.',
-'Mime comme une marionnette à fils.',
-'Mime comme si tout était beaucoup trop lourd.',
-'Mime comme si le sol était collant.',
-'Fais une pause de statue toutes les trois actions.',
-'Mime avec une expression de surprise permanente.',
-'Mime comme une star de cinéma muet très dramatique.',
-'Termine chaque mouvement par une pose de star.',
-'Mime comme si tu étais minuscule dans un monde de géants.'
+
+const dares = [
+{solo:'Fais une danse de robot pendant 10 secondes.',group:'Faites une danse de robots tous ensemble pendant 10 secondes.'},
+{solo:'Fais une publicité de 15 secondes pour une chaussette invisible.',group:'Inventez ensemble une publicité de 15 secondes pour une chaussette invisible.'},
+{solo:'Prononce un discours royal pour remercier ton canapé.',group:'Prononcez chacun une phrase pour remercier solennellement votre canapé.'},
+{solo:'Imite un commentateur sportif qui raconte la cuisson d’un œuf.',group:'Commentez ensemble la cuisson d’un œuf comme une finale sportive.'},
+{solo:'Fais une déclaration d’amour passionnée à une fourchette imaginaire.',group:'Faites chacun une courte déclaration d’amour à une fourchette imaginaire.'},
+{solo:'Prends trois poses de mannequin beaucoup trop dramatiques.',group:'Prenez tous ensemble trois poses de mannequins beaucoup trop dramatiques.'},
+{solo:'Chante « joyeux anniversaire » avec une voix de robot.',group:'Chantez « joyeux anniversaire » en chœur avec des voix de robots.'},
+{solo:'Raconte ta journée en trois bruitages.',group:'Racontez chacun votre journée en trois bruitages.'},
+{solo:'Présente la météo de demain comme une catastrophe totalement absurde.',group:'Présentez ensemble une météo catastrophique et totalement absurde.'},
+{solo:'Invente un cri de victoire et fais-le deux fois.',group:'Inventez un cri de victoire collectif et faites-le deux fois.'},
+{solo:'Fais le rire d’un méchant de dessin animé.',group:'Faites tous ensemble le rire de méchants de dessin animé.'},
+{solo:'Fais une chorégraphie avec seulement tes mains pendant 10 secondes.',group:'Faites ensemble une chorégraphie avec seulement vos mains pendant 10 secondes.'},
+{solo:'Vends un caillou imaginaire comme le produit révolutionnaire de l’année.',group:'Vendez ensemble un caillou imaginaire comme le produit révolutionnaire de l’année.'},
+{solo:'Présente-toi comme une star sur le tapis rouge, avec un nom inventé.',group:'Présentez-vous chacun comme une star, avec un nom inventé.'},
+{solo:'Invente une recette de soupe avec trois ingrédients impossibles.',group:'Inventez une soupe en proposant chacun un ingrédient impossible.'},
+{solo:'Dis « je suis une patate de compétition » avec le plus grand sérieux.',group:'Dites en chœur « nous sommes des patates de compétition » avec le plus grand sérieux.'},
+{solo:'Imite une poule qui découvre une porte automatique.',group:'Imitez tous ensemble des poules qui découvrent une porte automatique.'},
+{solo:'Fais un mini-opéra en chantant les noms de trois légumes.',group:'Chantez ensemble un mini-opéra avec les noms de trois légumes.'},
+{solo:'Fais un discours de 10 secondes dans une langue entièrement inventée.',group:'Faites une conversation de 10 secondes dans une langue entièrement inventée.'},
+{solo:'Invente un super-pouvoir inutile et montre comment il fonctionne.',group:'Inventez chacun un super-pouvoir inutile et montrez-le en un geste.'}
 ];
-const cards = Object.entries(themes).flatMap(([theme,data])=>Object.entries(data.groups).flatMap(([level,group])=>group.cards.map((text,index)=>({id:theme+'-'+level+'-'+index,theme,level,text}))));
-const $ = id=>document.getElementById(id);
-let theme='expressions', level='all', bag=[], current=null, hidden=false, round=1, drawn=0;
-let challengeBag=[], currentChallenge=null, untilSpecial=nextSpecial();
-let remaining=Number($('duration').value), deadline=0, interval=null;
+const cards=Object.entries(themes).flatMap(([theme,data])=>Object.entries(data.groups).flatMap(([level,group])=>group.cards.map((text,index)=>({id:theme+'-'+level+'-'+index,theme,level,text}))));
+const $=id=>document.getElementById(id);
+let theme='expressions',level='all',bag=[],current=null,hidden=false,round=1,drawn=0;
+let isSpecial=false,outcome=null,currentDare=null,dareBag=[],untilSpecial=nextSpecial();
+let remaining=Number($('duration').value),deadline=0,interval=null,timerState='ready';
+let fitRequest=null;
 function nextSpecial(){return 4+Math.floor(Math.random()*3);}
 function shuffle(list){const out=[...list];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]];}return out;}
-function pool(){return cards.filter(card=>card.theme===theme&&(level==='all'||card.level===level));}
-function fill(){bag=shuffle(pool());if(current&&bag.length>1&&bag[bag.length-1].id===current.id){[bag[0],bag[bag.length-1]]=[bag[bag.length-1],bag[0]];}drawn=0;}
-function status(){ $('status').textContent=drawn+' / '+pool().length+' mimes · mélange '+round; }
+function pool(){return cards.filter(c=>c.theme===theme&&(level==='all'||c.level===level));}
+function fill(){bag=shuffle(pool());if(current&&bag.length>1&&bag.at(-1).id===current.id){[bag[0],bag[bag.length-1]]=[bag[bag.length-1],bag[0]];}drawn=0;}
+function stopInterval(){if(interval!==null)clearInterval(interval);interval=null;}
+function paintClock(){
+ const disabled=Number($('duration').value)===0;
+ $('clock').textContent=disabled?'∞':Math.floor(remaining/60)+':'+String(remaining%60).padStart(2,'0');
+ $('clock').classList.toggle('urgent',!disabled&&remaining<=10);
+ $('start').disabled=!current||Boolean(outcome)||disabled;
+ $('reset-timer').disabled=!current||Boolean(outcome)||disabled;
+ $('start').textContent=timerState==='running'?'Ⅱ Pause':timerState==='paused'?'▶ Reprendre':timerState==='ended'?'↻ Rejouer':'▶ Chrono';
+ $('timer-label').textContent=outcome?'Gage révélé':disabled?'Sans chrono':timerState==='running'?'Ça mime !':timerState==='paused'?'En pause':timerState==='ended'?'Temps écoulé':'À ton rythme';
+ $('timer-detail').textContent=outcome?'Au tour des joueurs':disabled?'Jouez à votre rythme':timerState==='ended'&&isSpecial?'Trouvé à temps ?':timerState==='running'?'À vous de deviner':timerState==='paused'?'Reprenez quand vous voulez':'Chrono facultatif';
+}
+function resetTimer(){stopInterval();remaining=Number($('duration').value);timerState='ready';paintClock();}
+function tick(){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));if(remaining===0){stopInterval();timerState='ended';$('announcement').textContent='Temps écoulé. Confirmez le résultat si cette carte a un gage.';}paintClock();}
+function fitCard(){
+ if(fitRequest!==null)cancelAnimationFrame(fitRequest);
+ fitRequest=requestAnimationFrame(()=>{
+  fitRequest=null;
+  const prompt=$('prompt'),body=$('card-body');
+  prompt.style.fontSize='';
+  let size=parseFloat(getComputedStyle(prompt).fontSize);
+  while(body.scrollHeight>body.clientHeight+1&&size>18){size--;prompt.style.fontSize=size+'px';}
+ });
+}
 function render(){
-$('hide').disabled=!current;
-$('hide').setAttribute('aria-pressed',String(hidden));
-// Remove secret text from the DOM while hidden, including the challenge.
-$('challenge').hidden=true;
-$('challenge-text').textContent='';
-$('card').classList.toggle('special',Boolean(currentChallenge)&&!hidden);
-if(!current){$('icon').textContent=themes[theme].icon;$('tag').textContent='Prêt à entrer dans le jeu ?';$('prompt').textContent=themes[theme].welcome;$('hint').textContent='Tire une carte et garde-la pour toi.';}
-else if(hidden){$('icon').textContent='🌙';$('tag').textContent='À vous de deviner';$('prompt').textContent='Chut… ça mime !';$('hint').textContent='La carte et son éventuel gage sont cachés.';}
-else{const group=themes[current.theme].groups[current.level];$('icon').textContent=currentChallenge?'🪄':group.icon;$('tag').textContent=currentChallenge?'Carte spéciale · '+group.label:group.label+' · à mimer';$('prompt').textContent=current.text;$('hint').textContent=currentChallenge?'Un mime + un gage. Tu peux aussi passer !':themes[theme].hint;if(currentChallenge){$('challenge-text').textContent=currentChallenge;$('challenge').hidden=false;}}
-$('hide').textContent=hidden?'👀 Révéler la carte':'🙈 Cacher la carte';status();
+ $('card').classList.toggle('special',isSpecial&&!outcome);
+ $('card').classList.toggle('result',Boolean(outcome));
+ $('special-badge').hidden=!isSpecial;
+ $('special-badge').textContent=outcome?'✦ Gage révélé':'✦ Carte à gage';
+ $('recipient').hidden=true;$('recipient').textContent='';
+ const group=current?themes[current.theme].groups[current.level]:null;
+ if(!current){
+  $('tag').textContent='À toi de jouer';$('icon').textContent=themes[theme].icon;
+  $('prompt').textContent='On tire la première ?';$('hint').textContent='Garde la carte pour toi, puis fais deviner sans un mot.';
+ }else if(hidden){
+  $('tag').textContent=outcome?'Gage caché':'À vous de deviner';$('icon').textContent='🙈';
+  $('prompt').textContent=outcome?'Un petit secret…':'Chut… ça mime !';
+  $('hint').textContent=outcome?'Révèle le gage quand les joueurs sont prêts.':isSpecial?'Trouvé : gage au mime. Sinon : au groupe.':'La carte est cachée. À vous de trouver !';
+ }else if(outcome){
+  $('tag').textContent='Le défi d’après-mime';$('icon').textContent=outcome==='found'?'🎭':'👥';
+  $('recipient').hidden=false;$('recipient').textContent=outcome==='found'?'Le mime a un gage':'Les autres joueurs ont un gage';
+  $('prompt').textContent=outcome==='found'?currentDare.solo:currentDare.group;
+  $('hint').textContent='À faire maintenant… ou passez si vous préférez.';
+ }else{
+  $('tag').textContent=group.label+' · à mimer';$('icon').textContent=group.icon;
+  $('prompt').textContent=current.text;
+  $('hint').textContent=isSpecial?'Trouvé : gage au mime. Sinon : au groupe.':themes[theme].hint;
+ }
+ $('hide').disabled=!current;
+ $('hide').setAttribute('aria-pressed',String(hidden));
+ $('hide').textContent=hidden?(outcome?'👀 Voir le gage':'👀 Voir la carte'):(outcome?'🙈 Cacher le gage':'🙈 Cacher la carte');
+ $('draw').textContent=!current?'🎲 Tirer une carte':isSpecial&&!outcome?'↗ Passer':'🎲 Suivante';
+ $('outcomes').hidden=!current||!isSpecial||Boolean(outcome);
+ $('control-note').textContent=isSpecial&&!outcome?'Indiquez le résultat pour révéler le gage.':outcome?'Faites le gage, puis passez à la carte suivante.':'Un mime sans parler · les réglages sont en haut';
+ $('status').textContent=drawn+' / '+pool().length+' cartes';
+ $('bottom-note').textContent=outcome?(outcome==='found'?'Mime trouvé ✓':'Mime non trouvé'):'Paquet '+round+' · sans répétition';
+ paintClock();fitCard();
 }
 function animate(){const card=$('card');card.classList.remove('pop');void card.offsetWidth;card.classList.add('pop');}
-function paintClock(){const seconds=Math.max(0,remaining);$('clock').textContent=Math.floor(seconds/60)+':'+String(seconds%60).padStart(2,'0');$('clock').classList.toggle('urgent',seconds<=10);}
-function stop(){if(interval!==null)clearInterval(interval);interval=null;$('start').textContent='Démarrer';}
-function resetTimer(){stop();remaining=Number($('duration').value);$('timer-message').textContent='';paintClock();}
-function tick(){remaining=Math.max(0,Math.ceil((deadline-Date.now())/1000));paintClock();if(remaining===0){stop();$('timer-message').textContent='⏳ Temps écoulé !';$('start').textContent='Rejouer';}}
 function draw(){
-if(!bag.length){round++;fill();}
-current=bag.pop();drawn++;hidden=false;currentChallenge=null;
-if($('specials').checked){untilSpecial--;if(untilSpecial<=0){if(!challengeBag.length)challengeBag=shuffle(challenges);currentChallenge=challengeBag.pop();untilSpecial=nextSpecial();}}
-resetTimer();render();animate();
+ if(!bag.length){round++;fill();}
+ current=bag.pop();drawn++;hidden=false;isSpecial=false;outcome=null;currentDare=null;
+ if($('specials').checked){untilSpecial--;if(untilSpecial<=0){isSpecial=true;untilSpecial=nextSpecial();}}
+ resetTimer();render();animate();
 }
-function resetGame(){round=1;current=null;hidden=false;currentChallenge=null;challengeBag=[];untilSpecial=nextSpecial();fill();resetTimer();render();}
+function resolve(result){
+ if(!current||!isSpecial||outcome)return;
+ stopInterval();timerState='ready';outcome=result;hidden=false;
+ if(!dareBag.length)dareBag=shuffle(dares);
+ currentDare=dareBag.pop();
+ render();animate();
+ $('announcement').textContent=result==='found'?'Trouvé ! Celui qui mime a un gage.':'Pas trouvé. Les autres joueurs ont un gage.';
+}
+function resetGame(){current=null;hidden=false;isSpecial=false;outcome=null;currentDare=null;dareBag=[];untilSpecial=nextSpecial();round=1;fill();resetTimer();$('announcement').textContent='';render();}
 function updateTheme(){
-$('theme-note').textContent=themes[theme].note;
-document.querySelectorAll('[data-level]').forEach(button=>{const key=button.dataset.level;button.textContent=key==='all'?'Tout mélanger':themes[theme].groups[key].label;button.setAttribute('aria-pressed',String(key===level));});
+ $('theme-note').textContent=themes[theme].note;
+ const labels={all:'Tout mélanger',...Object.fromEntries(Object.entries(themes[theme].groups).map(([key,value])=>[key,value.label]))};
+ for(const option of $('category').options)option.textContent=labels[option.value];
+ $('category').value=level;
 }
 $('theme').addEventListener('change',()=>{theme=$('theme').value;level='all';updateTheme();resetGame();});
+$('category').addEventListener('change',()=>{level=$('category').value;resetGame();});
 $('draw').addEventListener('click',draw);
 $('hide').addEventListener('click',()=>{if(current){hidden=!hidden;render();}});
-$('reset').addEventListener('click',resetGame);
-$('specials').addEventListener('change',()=>{untilSpecial=nextSpecial();if(!$('specials').checked){currentChallenge=null;render();}});
-document.querySelectorAll('[data-level]').forEach(button=>button.addEventListener('click',()=>{if(button.dataset.level===level)return;level=button.dataset.level;document.querySelectorAll('[data-level]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));resetGame();}));
+$('found').addEventListener('click',()=>resolve('found'));
+$('missed').addEventListener('click',()=>resolve('missed'));
 $('duration').addEventListener('change',resetTimer);
-$('start').addEventListener('click',()=>{if(interval!==null){tick();stop();if(remaining>0)$('start').textContent='Reprendre';return;}if(remaining===0)remaining=Number($('duration').value);$('timer-message').textContent='';deadline=Date.now()+remaining*1000;interval=setInterval(tick,200);$('start').textContent='Pause';paintClock();});
-document.addEventListener('visibilitychange',()=>{if(interval!==null)tick();});
+$('reset-timer').addEventListener('click',resetTimer);
+$('specials').addEventListener('change',()=>{untilSpecial=nextSpecial();if(!$('specials').checked&&!outcome)isSpecial=false;render();});
+$('reset').addEventListener('click',()=>{resetGame();$('settings').close();});
+$('start').addEventListener('click',()=>{
+ if(!current||outcome||Number($('duration').value)===0)return;
+ if(timerState==='running'){tick();if(timerState!=='ended'){stopInterval();timerState='paused';}paintClock();return;}
+ if(remaining===0)remaining=Number($('duration').value);
+ hidden=true;deadline=Date.now()+remaining*1000;timerState='running';interval=setInterval(tick,200);render();
+});
+$('open-settings').addEventListener('click',()=>{
+ if(current)hidden=true;
+ if(timerState==='running'){tick();if(timerState!=='ended'){stopInterval();timerState='paused';}}
+ render();$('settings').showModal();
+});
+$('close-settings').addEventListener('click',()=>$('settings').close());
+$('settings').addEventListener('click',event=>{if(event.target===$('settings')){const box=$('settings').getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)$('settings').close();}});
+$('settings').addEventListener('close',fitCard);
+document.addEventListener('visibilitychange',()=>{if(timerState==='running')tick();});
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(fitCard).observe($('card-body'));
+window.addEventListener('resize',fitCard);
 updateTheme();fill();render();paintClock();
+
 </script>
 </body>
 </html>
